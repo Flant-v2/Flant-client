@@ -1,0 +1,559 @@
+.post-card {
+  background-color: white; /* 카드의 배경색 */
+  padding: 20px;
+  margin-bottom: 16px; /* 카드 간 간격 */
+  border-radius: 8px;
+  width: 730px; /* 고정된 너비 설정 */
+  overflow: hidden; /* 넘치는 내용 숨기기 */
+  position: relative; /* 선을 카드 아래쪽에 위치시키기 위해 설정 */
+}
+
+.post-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #dddddd; /* 카드 아래쪽 선의 색상 */
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+}
+
+.author-image {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.author-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-details h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.author-details span {
+  font-size: 14px;
+  color: #666;
+}
+
+.post-images {
+  display: flex;
+  gap: 8px; /* 사진 사이의 간격 */
+  justify-content: center; /* 이미지들을 중앙에 정렬 */
+}
+
+.post-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 이미지가 컨테이너에 맞게 조정되고, 잘리지 않음 */
+  background-color: #fafafa;
+  border-radius: 8px; /* 이미지의 모서리 둥글게 */
+}
+
+.single img {
+  height: 300px; /* 높이 고정 */
+}
+
+.two .post-images img {
+  width: calc(50% - 4px); /* 두 이미지를 가로로 나란히 */
+  height: 300px; /* 높이 고정 */
+}
+
+.three {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+
+  .left-image {
+    flex: 1;
+    display: flex;
+    align-items: center; /* 세로 가운데 정렬 */
+    justify-content: center;
+  }
+
+  .right-images {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 8px;
+  }
+
+  .left-image img {
+    width: 100%;
+    height: 100%; /* 부모 컨테이너의 높이에 맞추기 */
+  }
+
+  .right-images img {
+    width: 100%;
+    height: calc(50% - 4px); /* 오른쪽 이미지의 높이 조정, 높이 총합이 왼쪽과 같도록 */
+  }
+}
+
+.comments-section {
+  flex: 1; /* 남은 공간을 모두 차지하도록 설정 */
+  overflow-y: auto; /* 댓글 목록이 길어질 때 스크롤 가능하도록 설정 */
+  padding-bottom: 60px; /* 댓글 입력 폼과 겹치지 않도록 여백 추가 */
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between; /* 댓글 버튼을 오른쪽 끝에 배치 */
+  align-items: center;
+  margin-top: 16px;
+
+  button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+
+    /* 이 부분 추가: 아이콘과 숫자를 나란히 배치 */
+    .material-symbols-outlined {
+      color: #555555; /* 기본 아이콘 색상 */
+      font-size: 24px; /* 아이콘 크기 */
+      margin-right: 4px; /* 아이콘과 숫자 사이의 간격 */
+    }
+
+    .like-count {
+      font-size: 16px; /* 숫자 크기 */
+      color: #555555; /* 숫자 색상 */
+    }
+  }
+
+  .liked .material-symbols-outlined {
+    color: rgb(252, 2, 105); /* 좋아요 아이콘 색상 (좋아요 눌렀을 때) */
+  }
+
+  /* 좋아요 버튼과 댓글 버튼 사이의 간격 추가 */
+  button:last-of-type {
+    margin-left: auto; /* 마지막 버튼(댓글)을 오른쪽으로 밀어냄 */
+  }
+}
+
+.comments-section form input {
+  width: calc(100% - 60px);
+  padding: 8px;
+  margin-right: 8px;
+}
+
+.comments-section form button {
+  padding: 8px 16px;
+}
+
+/* 팝업 배경 */
+/* 댓글 팝업 오버레이 */
+.comments-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 팝업이 가장 위에 오도록 설정 */
+}
+
+/* 댓글 팝업 */
+.comments-popup {
+  width: 1200px;
+  height: 800px;
+  background: white;
+  border-radius: 50px;
+  display: flex; /* 가로 방향으로 정렬 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* 내용이 영역을 넘지 않도록 설정 */
+  position: relative; /* 상대 위치 설정 */
+}
+
+/* 팝업 콘텐츠 영역 */
+.popup-content {
+  display: flex; /* 가로 방향으로 콘텐츠 정렬 */
+  width: 100%; /* 전체 폭을 차지하도록 설정 */
+  height: 100%; /* 전체 높이를 차지하도록 설정 */
+}
+
+/* 게시글 내용 영역 */
+.post-content-left {
+  width: 65%; /* 전체 폭의 60% 차지 */
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto; /* 내용이 영역을 넘을 때 스크롤 가능하도록 설정 */
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 정렬 */
+  align-items: center; /* 자식 요소들을 수평 중앙에 배치 */
+  border-right: 1px solid #ddd; /* 오른쪽 경계선 추가 */
+}
+
+/* 게시글 제목 */
+.post-content-left h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 15px;
+}
+
+/* 게시글 영역 내의 이미지 */
+.post-content-left img {
+  max-width: 95%; /* 이미지의 최대 너비를 80%로 제한 */
+  height: auto; /* 이미지의 높이를 자동으로 설정하여 비율 유지 */
+  display: block; /* 이미지 아래쪽에 여백이 생기는 것을 방지 */
+  margin: 10px 0; /* 이미지 상하에 여백 추가 */
+  border-radius: 15px;
+  object-fit: cover; /* 이미지 비율 유지, 컨테이너에 맞추기 */
+}
+
+/* 댓글 영역 */
+.comments-content-right {
+  width: 35%;
+  padding: 20px 20px 0px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative; /* 자식 요소의 절대 위치 설정을 위한 상대 위치 */
+  overflow-y: auto; /* 댓글 목록이 길어질 때 스크롤 가능하도록 설정 */
+}
+
+/* 댓글 제목 */
+.comments-content-right h3 {
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+  margin-bottom: 20px; /* 제목과 댓글 사이에 간격 추가 */
+}
+
+.comment-text {
+  word-wrap: break-word; /* 긴 댓글이 자동으로 줄바꿈되도록 설정 */
+  padding-left: 3px;
+  padding-right: 25px;
+  margin-bottom: 3px;
+}
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 댓글 폼 */
+.comment-form {
+  position: sticky; /* 스크롤 시에도 하단에 고정되도록 설정 */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  background-color: white;
+  box-sizing: border-box;
+  z-index: 1; /* 댓글 영역 위로 올라오도록 설정 */
+  background-clip: padding-box; /* 배경이 패딩까지 확장되지 않도록 설정 */
+}
+
+/* 댓글 입력창 */
+.comment-input {
+  width: calc(100% - 100px); /* 버튼의 너비와 여백을 고려하여 입력창 너비 조정 */
+  margin-right: 10px; /* 버튼과 입력창 사이의 간격 */
+  resize: none; /* 사용자가 크기를 조절하지 못하도록 설정 */
+  border-radius: 35px; /* 입력창의 모서리 둥글게 설정 */
+  text-align: left; /* 입력된 텍스트를 가로 방향으로 왼쪽 정렬 */
+  padding-left: 20px;
+  padding: 5px 20px; /* 위아래 5px, 좌우 10px 패딩 */
+  line-height: normal; /* 줄 간격을 기본값으로 설정 */
+  box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
+  height: 40px; /* 입력칸의 높이를 내용에 맞게 자동으로 조정 */
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+}
+
+/* 댓글 등록 버튼 */
+.submit-btn {
+  width: 80px; /* 버튼의 너비 */
+  height: 40px; /* 버튼의 높이 */
+  background-color: #27d785; /* 버튼 배경 색상 */
+  color: white; /* 버튼 글자 색상 */
+  border: none; /* 버튼 경계선 제거 */
+  border-radius: 35px;
+  cursor: pointer; /* 버튼에 커서 모양을 포인터로 설정 */
+}
+
+.popup-header {
+  width: 100%;
+  padding: 10px; /* 헤더 안쪽 여백 설정 */
+  border-bottom: none; /* 회색 경계선 제거 */
+  display: flex; /* Flexbox로 자식 요소를 정렬 */
+  justify-content: flex-end; /* 자식 요소를 우측으로 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  position: absolute; /* 상단에 고정 위치 */
+  top: 0;
+  left: 0; /* 왼쪽 정렬 */
+  z-index: 1001; /* 팝업 내용 위에 버튼을 표시 */
+}
+
+/* 닫기 버튼 */
+.popup-header button {
+  border: none;
+  background: none;
+  font-size: 1.2rem; /* 버튼의 크기 조정 */
+  cursor: pointer; /* 클릭 시 포인터 모양으로 변경 */
+  color: bla; /* 버튼의 글자 색상 */
+  padding: 0; /* 버튼의 패딩을 제거하여 공백 최소화 */
+  margin-top: 20px;
+  margin-right: 30px; /* 버튼의 마진을 제거하여 공백 최소화 */
+}
+
+::-webkit-scrollbar {
+  width: 10px; /* 스크롤바의 너비 */
+}
+
+/* 스크롤바의 트랙 (스크롤바가 움직이는 영역) */
+::-webkit-scrollbar-track {
+  background: #ffffff; /* 배경 색상 */
+  border-radius: 15px; /* 모서리 둥글게 */
+}
+
+/* 스크롤바의 핸들 (스크롤바를 드래그하는 부분) */
+::-webkit-scrollbar-thumb {
+  background: #bbbbbb; /* 핸들 색상 */
+  border-radius: 15px; /* 모서리 둥글게 */
+}
+
+/* 핸들에 마우스가 올 때의 스타일 */
+::-webkit-scrollbar-thumb:hover {
+  background: #929292; /* 핸들 색상 (호버 상태) */
+}
+
+.comment-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* 댓글 구분선 추가 */
+}
+
+.comment-author {
+  margin-right: 15px; /* 닉네임 오른쪽 간격 추가 */
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.comment-time {
+  font-size: 12px; /* 시간 텍스트의 크기 설정 */
+  color: #888; /* 시간 텍스트 색상 설정 */
+}
+
+.comment-container {
+  align-items: flex-end; /* 댓글 내용과 버튼을 세로 방향으로 정렬 */
+  width: 100%; /* 버튼이 댓글 내용의 오른쪽에 위치하도록 설정 */
+  gap: 10px; /* 댓글 내용과 버튼 사이의 간격 */
+}
+
+.comment-content {
+  margin-top: 15px;
+  margin-left: 5;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* 남은 공간을 모두 차지하게 함 */
+}
+
+.artist-comment-item {
+  // 아티스트의 댓글만 따로 상단에 고정
+  background-color: rgba(0, 255, 106, 0.274);
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column; /* 기본적으로 세로 방향 정렬 */
+  position: relative; /* 자식 요소의 위치를 상대적으로 설정할 수 있게 함 */
+  padding: 5px; /* 댓글 여백 설정 */
+  margin-bottom: 5px; /* 댓글 사이 여백 */
+}
+
+.artist-comment-author {
+  margin-right: 15px; /* 닉네임 오른쪽 간격 추가 */
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.artist-comment-time {
+  font-size: 12px; /* 시간 텍스트의 크기 설정 */
+  color: #888; /* 시간 텍스트 색상 설정 */
+}
+
+.artist-comment-content {
+  margin-left: 10px;
+  margin-top: 10px;
+  flex: 1; /* 남은 공간을 모두 차지하게 함 */
+}
+.artist-name {
+  font-size: 15px;
+  margin-right: 10px;
+}
+.author-name {
+  font-size: 15px;
+  margin-left: -7px;
+}
+
+.artist-header {
+  margin-bottom: 20px;
+}
+
+/* Modal overlay style */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal content style */
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+}
+
+/* comment-actions를 오른쪽에 배치 */
+.comment-actions {
+  display: flex; /* 버튼을 가로로 배치 */
+  gap: 5px; /* 버튼 사이의 간격 */
+  align-items: center; /* 버튼을 세로 방향으로 중앙 정렬 */
+  margin-top: 10px;
+  margin-left: 69%;
+}
+
+.comment-actions button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #007bff; /* 버튼 색상 */
+}
+
+/* 수정 버튼 스타일 */
+.edit-button,
+.delete-button {
+  border-radius: 4px; /* 모서리 둥글게 */
+  width: 40px;
+  height: 25px;
+  font-size: 10px;
+  color: black;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-button {
+  background-color: #ffffff;
+  margin-right: -7px;
+}
+
+.edit-button:hover {
+  background-color: #b4a4a4;
+  box-shadow: 0 6px 8px rgba(255, 237, 237, 0.15);
+}
+
+.delete-button {
+  margin-left: 10px; /* 수정 버튼과 삭제 버튼 사이의 간격 */
+  background-color: #ff8290;
+}
+
+.delete-button:hover {
+  background-color: #e94353;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 수정 입력 텍스트 영역 */
+.edit-textarea {
+  margin-top: 10px;
+  width: 90%;
+  height: 40px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ced4da; /* 연한 회색 테두리 */
+  border-radius: 4px; /* 모서리 둥글게 */
+  resize: vertical; /* 세로 방향 크기 조절 가능 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 가벼운 그림자 */
+}
+
+/* 댓글 수정 모드에서 버튼 숨기기 */
+.edit-mode .comment-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-mode .edit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* 수정 모드에서의 버튼 그룹 */
+.edit-actions {
+  display: flex;
+  gap: 4px; /* 버튼 사이의 간격 */
+  margin-top: 10px; /* 위쪽 여백 추가 */
+}
+
+.save-button,
+.cancel-button {
+  width: 60px;
+  height: 30px;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px; /* 모서리 둥글게 */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.save-button {
+  background-color: #ffffff; /* 흰색 배경 */
+  color: black;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.save-button:hover {
+  background-color: #d2d2d2; /* 호버 시 더 어두운 색상 */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cancel-button {
+  background-color: #6c757d; /* 회색 배경 */
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-button:hover {
+  background-color: #5a6268; /* 호버 시 더 어두운 회색 */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}

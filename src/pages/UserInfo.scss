@@ -1,0 +1,158 @@
+// userinfo.scss
+
+.black-background {
+  background-color: #6666;
+  color: #fff;
+  text-align: center;
+  padding: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.black-background-title-name {
+  font-size: 2em;
+}
+
+.black-background-button {
+  background-color: #6666;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.black-background-button:hover {
+  background-color: #777;
+}
+.black-background-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.confirm-dialog,
+.password-input-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.confirm-dialog button,
+.password-input-dialog button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.confirm-dialog .confirm-yes,
+.password-input-dialog .confirm-yes {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 4px;
+}
+
+.confirm-dialog .confirm-no,
+.password-input-dialog .confirm-no {
+  background-color: #f44336;
+  color: white;
+  border-radius: 4px;
+}
+
+.password-input-dialog input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+// 알림 및 카트 아이콘 숨기기
+.header-notification-icon,
+.header-box-shop-image {
+  display: none;
+}
+
+.user-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-info {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.user-icon:hover .user-info {
+  display: block;
+}
+
+.update-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 80%; /* 원하는 크기로 조정 */
+  max-width: 500px; /* 최대 너비 설정 */
+  box-sizing: border-box;
+}
+
+.update-dialog-title {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.update-dialog-section {
+  margin-bottom: 20px;
+}
+
+.update-dialog-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.update-dialog-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.update-dialog-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(57, 191, 151);
+  color: #fff;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1em;
+}
+
+.update-dialog-button:last-of-type {
+  background-color: #6c757d;
+}

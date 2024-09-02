@@ -1,0 +1,179 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* 수직 방향으로 레이아웃 설정 */
+}
+
+.main-page {
+  margin-top: 120px; /* 헤더 높이만큼 여백 추가 */
+  padding: 0 15px; /* 좌우 여백 추가 */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 중앙 정렬 */
+  flex: 1; /* 남은 공간 차지 */
+}
+
+.mainPage-main {
+  width: 100%;
+  max-width: 1200px; /* 최대 너비 설정 */
+  margin: 0 auto; /* 수평 중앙 정렬 */
+}
+
+.mainPage-main-my,
+.mainPage-main-all {
+  width: 100%; /* 너비를 100%로 설정하여 중앙 정렬 */
+  margin-top: 40px;
+}
+
+.footer {
+  width: 100%;
+  height: 100px; /* 필요에 따라 높이 조절 */
+  background-color: #f1f1f1; /* 배경색 설정 */
+}
+
+.header-box {
+  width: 100%;
+  height: 120px;
+  border-bottom: 1px solid #ebedf2;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px; /* 좌우 여백 추가 */
+  box-sizing: border-box; /* 패딩을 너비 계산에 포함 */
+  position: fixed; /* 헤더를 페이지 상단에 고정 */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* 헤더가 다른 요소 위에 있도록 설정 */
+}
+
+.header-box-logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-box-logo-image {
+  width: 150px;
+  height: auto;
+}
+
+.header-box-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 140px;
+  border-right: 0.5px solid #ebedf2;
+}
+
+.header-box-btn {
+  flex: 1 1 auto;
+  margin: 10px;
+  margin-right: 25px;
+  padding: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 20px;
+}
+
+.btn-3 {
+  background-image: linear-gradient(
+    to right,
+    #84fab0 0%,
+    #8fd3f4 51%,
+    #84fab0 100%
+  );
+}
+
+.header-box-btn:hover {
+  background-position: right center; /* change the direction of the change here */
+}
+
+.header-box-user {
+  display: flex;
+  align-items: center;
+}
+
+.header-box-user-info {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.header-box-user-info button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.header-notification-icon,
+.header-user-icon,
+.header-box-shop-image {
+  height: auto; /* 비율 유지 */
+  margin-right: 15px; /* 아이콘 간 여백 조정 */
+}
+
+.header-notification-icon {
+  width: 40px; /* 아이콘 크기 조정 */
+}
+
+.header-user-icon {
+  width: 32px; /* 아이콘 크기 조정 */
+}
+
+.header-box-shop-image {
+  width: 40px; /* 아이콘 크기 조정 */
+  margin-bottom: 5px;
+}
+
+.header-user-dropdown {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  transition: visibility 0s, opacity 0.3s linear;
+}
+
+.header-user-dropdown a,
+.header-user-dropdown button {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.header-user-dropdown a:hover,
+.header-user-dropdown button:hover {
+  background-color: #f1f1f1;
+}
+
+.header-box-user-info:hover .header-user-dropdown,
+.header-user-dropdown:hover {
+  visibility: visible;
+  opacity: 1;
+}
+
+.no-communities {
+  text-align: center;
+  font-size: 200px;
+  font-weight: bold;
+}

@@ -1,0 +1,69 @@
+.header-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-box-logo-and-name {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-box-logo-image {
+    width: 120px;
+    height: auto;
+  }
+  
+  .header-community-name {
+    font-size: 40px;
+    margin-left: 10px; /* 로고와 커뮤니티 이름 사이의 간격 */
+    color: #333;
+  }
+  
+  .header-box-user {
+    display: flex;
+    align-items: center;
+  }
+
+  .new-amsterdam-regular {
+    font-family: "New Amsterdam", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .header-user-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px; /* 드롭다운 메뉴의 가로 길이 설정 */
+    z-index: 1100;
+}
+
+.header-box-user-dropdown-container:hover .header-user-dropdown {
+    display: block;
+}
+
+.header-user-dropdown a,
+.header-user-dropdown button {
+    display: block;
+    padding: 8px 0; /* 패딩으로 여백 추가 */
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    color: #333; /* 텍스트 색상 */
+    text-decoration: none; /* 링크의 기본 밑줄 제거 */
+    border-bottom: 1px solid #ddd; /* 항목 아래에 구분선 추가 */
+}
+
+.header-user-dropdown a:last-child,
+.header-user-dropdown button:last-child {
+    border-bottom: none; /* 마지막 항목 아래는 구분선 제거 */
+}
+  

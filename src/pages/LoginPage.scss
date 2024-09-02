@@ -1,0 +1,195 @@
+// src/pages/LoginPage.scss
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.login-box {
+  margin: 2.4rem auto;
+  padding: 0px 4.8rem;
+  width: 29.6rem;
+  height: 721px;
+  background-color: white;
+  border: 1px solid rgb(245, 247, 250);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0px 0px 1px black;
+}
+.main-email {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0.1rem solid rgb(238, 238, 238);
+}
+.main-box-logo {
+  width: 270px;
+  height: 250px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// input css start
+.main-email {
+  position: relative;
+  width: 300px;
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+.main-email-input {
+  font-size: 15px;
+  color: #222222;
+  width: 300px;
+  border: none;
+  border-bottom: solid #aaaaaa 1px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  position: relative;
+  background: none;
+  z-index: 5;
+}
+
+.main-email-input::placeholder {
+  color: #aaaaaa;
+}
+.main-email-input:focus {
+  outline: none;
+}
+
+.main-email-span {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0%; /* right로만 바꿔주면 오 - 왼 */
+  background-color: #666;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  transition: 0.5s;
+}
+
+.main-email-label {
+  position: absolute;
+  color: #aaa;
+  left: 10px;
+  font-size: 20px;
+  bottom: 8px;
+  transition: all 0.2s;
+}
+
+.main-email-input:focus ~ .main-email-label,
+.main-email-input:valid ~ .main-email-label {
+  font-size: 16px;
+  bottom: 40px;
+  color: #666;
+  font-weight: bold;
+}
+
+.main-email-input:focus ~ .main-email-span,
+.main-email-input:valid ~ .main-email-span {
+  width: 100%;
+}
+// input css end
+
+.main-password {
+  margin-top: 45px;
+}
+
+// 로그인 버튼 css start
+.main-login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 340px;
+  margin-top: 50px;
+  margin-left: 15px;
+  //margin: 0 auto;
+  //border-right: 0.5px solid #ebedf2;
+}
+.main-login-btn {
+  flex: 1 1 auto;
+  margin: 10px;
+  margin-right: 25px;
+  padding: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  box-shadow: 0 0 20px #eee;
+  border-radius: 20px;
+  border: none;
+  font-size: 20px;
+}
+
+.login-btn-3 {
+  background-image: linear-gradient(
+    to right,
+    #84fab0 0%,
+    #8fd3f4 51%,
+    #84fab0 100%
+  );
+}
+.main-login-btn:hover {
+  background-position: right center; /* change the direction of the change here */
+}
+
+.hedaer-box-user {
+  display: flex;
+  margin-right: 80px;
+}
+// 로그인 버튼 css end
+.main-signup {
+  margin-top: 10px;
+}
+.main-signup-a {
+  color: rgb(142, 142, 142);
+  text-decoration: none;
+  margin: 20px;
+}
+
+.main-signup-a:hover {
+  color: black;
+}
+
+footer {
+  margin-top: 55px;
+  width: 330px;
+}
+// 혹은 line start
+.footer-line {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-line::before,
+.footer-line::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid rgb(142, 142, 142);
+  margin: 0 10px;
+}
+// 혹은 line css end
+.footer-socialLogin {
+  display: flex;
+  justify-content: center;
+}
+
+.login-google-image {
+  width: 40;
+  height: 40px;
+  margin-top: 20px;
+}

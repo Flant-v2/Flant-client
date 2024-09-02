@@ -1,0 +1,220 @@
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #38c172;
+  color: white;
+  padding: 10px 60px; /* 세로 길이를 줄이기 위해 패딩 조정 */
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  z-index: 10000;
+  justify-content: center; /* 안내문구 가운데 정렬 */
+  height: auto; /* 버튼의 높이를 자동으로 조정 */
+
+  &:hover {
+    background-color: darken(#38c172, 10%);
+    transform: scale(1.05);
+  }
+
+  .post-text {
+    margin: 0; /* 문구의 기본 여백 제거 */
+    text-align: center; /* 문구 가운데 정렬 */
+  }
+
+  /* 이미지 업로드 버튼 제거 */
+  .custom-file-upload {
+    display: none; /* 버튼과 관련된 요소를 숨김 */
+  }
+}
+
+.custom-file-upload {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .upload-btn {
+    background-color: #1d72b8; /* 파란색 */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    position: relative; // 버튼의 위치를 위해 상대적 위치 지정
+
+    &:hover {
+      background-color: darken(#1d72b8, 10%);
+    }
+  }
+
+  .image-upload-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; // 화면에서 숨기기
+    cursor: pointer;
+    z-index: 1; // 버튼 위에 오도록 설정
+  }
+
+  .selected-files {
+    margin-left: 15px; // 버튼과 파일명 사이의 간격
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        background-color: #f4f4f4;
+        margin-bottom: 5px;
+        padding: 5px;
+        border-radius: 3px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.floating-form {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 600px;
+  position: relative;
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 2; // z-index 조정
+  }
+
+  .post-form {
+    display: flex;
+    flex-direction: column;
+
+    /* 텍스트 입력 필드 커스텀 */
+    .content-input {
+      width: 100%;
+      height: 200px; /* 입력 필드 높이 조정 */
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      resize: none; /* 크기 조절 제거 */
+      outline: none; /* 기본 UI 제거 */
+      z-index: 2; // z-index 조정
+      position: relative; // z-index 적용을 위한 상대적 위치 지정
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: space-between; /* 이미지 업로드 버튼 좌측, 게시 버튼 우측 배치 */
+      align-items: center;
+      margin-top: 20px;
+      position: relative; // z-index 적용을 위한 상대적 위치 지정
+
+      .floating-form-upload {
+        display: flex;
+        align-items: center; /* 버튼과 파일명을 수직 가운데 정렬 */
+
+        .upload-btn {
+          background-color: #1d72b8; /* 파란색 */
+          color: white;
+          padding: 8px 16px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 14px;
+          transition: background-color 0.3s;
+          z-index: 2; // z-index 조정
+          position: relative; // z-index 적용을 위한 상대적 위치 지정
+
+          &:hover {
+            background-color: darken(#1d72b8, 10%);
+          }
+        }
+
+        .image-upload-input {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0; // 화면에서 숨기기
+          cursor: pointer;
+          z-index: 1; // z-index 조정
+        }
+
+        .selected-files {
+          margin-left: 15px; // 버튼과 파일명 사이의 간격
+          ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+              background-color: #f4f4f4;
+              margin-bottom: 5px;
+              padding: 5px;
+              border-radius: 3px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      .submit-btn {
+        background-color: #38c172; /* 연두색으로 변경 */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+        z-index: 2; // z-index 조정
+        position: relative; // z-index 적용을 위한 상대적 위치 지정
+
+        &:hover {
+          background-color: darken(#38c172, 10%);
+        }
+      }
+    }
+  }
+}
+.floating-btn {
+  cursor: pointer;
+  /* 기타 버튼 스타일 */
+}
+
+.floating-btn.disabled {
+  pointer-events: none; /* 클릭 이벤트를 비활성화 */
+  opacity: 0.5; /* 버튼의 시각적 비활성화 표시 */
+  /* 필요한 추가 스타일을 설정 */
+}

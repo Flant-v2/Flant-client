@@ -1,0 +1,79 @@
+.merchandise-detail {
+  padding: 150px 16px 16px; // 상단 여백을 추가하여 헤더와 겹치지 않게 함
+
+  .thumbnail {
+    text-align: center;
+    margin-bottom: 16px;
+
+    img {
+      width: 400px;   // 썸네일의 크기
+      height: 400px;  // 썸네일의 크기
+      object-fit: cover; // 가로세로 비율을 유지하며 자르기
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+    color: #333;
+  }
+
+  .price {
+    font-size: 1.2rem;
+    color: #007aff;
+    margin-bottom: 16px;
+  }
+
+  .options, .quantity {
+    margin-bottom: 16px;
+  }
+
+  .action-buttons {
+    margin-bottom: 24px;
+
+    button {
+      background-color: #007aff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-right: 10px;
+      
+      &:hover {
+        background-color: #005bb5;
+      }
+    }
+
+    .go-to-cart-button {
+      background-color: #4CAF50;
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column; // 이미지를 세로로 나열
+    align-items: center; // 이미지를 가운데 정렬
+    gap: 16px;
+
+    .detail-image {
+      max-width: 600px;  // 원하는 추가 이미지의 최대 너비
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: contain; // 이미지가 비율에 맞춰 보이게 설정
+      border: 1px solid #ddd;
+    }
+
+    p {
+      text-align: center;
+      color: #333;
+    }
+  }
+}
