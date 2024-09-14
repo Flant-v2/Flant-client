@@ -1,5 +1,5 @@
-import { RequestPayParams } from "./../../types/portone.d";
-import { RequestPayResponse } from "./../../types/portone.d";
+import { RequestPayParams } from "../../types/portone";
+import { RequestPayResponse } from "../../types/portone";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 interface PaymentPortoneProps {

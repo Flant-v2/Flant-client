@@ -1,5 +1,5 @@
 import React from "react";
-import "./../styles/CommunityList.scss";
+import "../styles/CommunityList.scss";
 
 interface Community {
   communityId: number;
@@ -22,7 +22,7 @@ const CommunityList: React.FC<CommunityListProps> = ({
   return (
     <div className="community-list">
       <h1 className="community-list-title">{title}</h1>
-      {communities.map(community => (
+      {communities.map((community) => (
         <div
           key={community.communityId}
           className="figure community-card-box"
