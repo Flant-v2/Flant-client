@@ -1,0 +1,9 @@
+branchName: "${issue.number}"
+branches:
+  - label: "🚀 feature"
+    prefix: "feature/"
+  - label: "🔨 refactor"
+    prefix: "feature/"
+  - label: "🐛 bug"
+    prefix: "fix/"
+autoCloseIssue: true
