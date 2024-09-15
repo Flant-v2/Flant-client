@@ -9,7 +9,7 @@ const pretendard = localFont({
   variable: '--font-pretendard',
 });
 
-const FAVICON_PATH = '/images/favicons';
+const FAVICON_PATH = "/assets/favicons";
 
 export const metadata: Metadata = {
   title: '플랜트',
