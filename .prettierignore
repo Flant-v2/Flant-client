@@ -10,3 +10,5 @@ compiled/
 **/.git
 **/.svn
 **/.hg
+
+_deprecated/
