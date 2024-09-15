@@ -1,4 +1,4 @@
-import { StrictPropsWithChildren } from "@/types/common";
+import type { StrictPropsWithChildren } from '@/types/common';
 
 const ProvidersLayout = ({ children }: StrictPropsWithChildren) => {
   return <>{children}</>;
