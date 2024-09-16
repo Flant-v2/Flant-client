@@ -101,8 +101,6 @@ module.exports = {
     ],
     // 정의되지 않은 변수 사용 방지 규칙
     'no-undef': 'error',
-    // 변수 및 함수를 정의 전에 사용할 수 있게 해주는 규칙
-    'no-use-before-define': ['error', { variables: false, functions: false }],
     // foo['bar'] 대신 foo.bar 사용 강제 규칙
     'dot-notation': 'error',
     // 한 줄당 글자 제한하는 규칙, 주석 제외
