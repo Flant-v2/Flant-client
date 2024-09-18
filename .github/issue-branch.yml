@@ -8,7 +8,7 @@ branches:
     prefix: 'fix/'
   - label: '*'
     prefix: 'feature/'
+commentMessage: 'Branch ${branchName} 로 생성되었어요 🎉'
 autoCloseIssue: true
 autoLinkIssue: true
 openDraftPR: true
-commentMessage: 'Branch ${branchName} 로 생성되었어요 🎉'
