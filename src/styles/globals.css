@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* path-fill-current */
+  .path-fill-current path {
+    @apply fill-current;
+  }
+  /* path-stroke-current */
+  .path-stroke-current path {
+    @apply stroke-current;
+  }
+  /* path-fill-current1 */
+  .path-fill-current1 path:nth-child(1) {
+    @apply fill-current;
+  }
+  /* path-stroke-current1 */
+  .path-stroke-current1 path:nth-child(1) {
+    @apply stroke-current;
+  }
+}
