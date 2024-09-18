@@ -1,4 +1,7 @@
+# 브랜치 이름 설정
 branchName: '${issue.number}'
+
+# 브랜치 설정
 branches:
   - label: '🚀 feature'
     prefix: 'feature/'
@@ -8,7 +11,15 @@ branches:
     prefix: 'fix/'
   - label: '*'
     prefix: 'feature/'
+
+# 코멘트 메시지 설정
 commentMessage: 'Branch ${branchName} 로 생성되었어요 🎉'
+
+# 자동 설정
 autoCloseIssue: true
+copyIssueDescriptionToPR: true
+copyIssueLabelsToPR: true
+copyIssueAssigneeToPR: true
 autoLinkIssue: true
 openDraftPR: true
+prSkipCI: true
