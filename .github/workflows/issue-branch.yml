@@ -1,9 +1,14 @@
-branchName: "${issue.number}"
+branchName: '${issue.number}'
 branches:
-  - label: "🚀 feature"
-    prefix: "feature/"
-  - label: "🔨 refactor"
-    prefix: "feature/"
-  - label: "🐛 bug"
-    prefix: "fix/"
+  - label: '🚀 feature'
+    prefix: 'feature/'
+  - label: '🔨 refactor'
+    prefix: 'feature/'
+  - label: '🐛 bug'
+    prefix: 'fix/'
+  - label: '*'
+    prefix: 'feature/'
 autoCloseIssue: true
+autoLinkIssue: true
+openDraftPR: true
+commentMessage: 'Branch ${branchName} 로 생성되었어요 🎉'

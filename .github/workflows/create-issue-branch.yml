@@ -2,8 +2,6 @@ name: Create Issue Branch
 on:
   issues:
     types: [assigned]
-  issue_comment:
-    types: [created]
   pull_request:
     types: [closed]
 
@@ -15,3 +13,5 @@ jobs:
         uses: robvanderleek/create-issue-branch@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Echo branch name
+        run: echo ${{ steps.Create_Branch_For_Issue.outputs.branchName }}
