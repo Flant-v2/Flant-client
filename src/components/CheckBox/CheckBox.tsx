@@ -7,14 +7,14 @@ type CheckBoxProps = VariantProps<typeof CheckBoxVariants> & {
   onCheckedChange: (checked: boolean) => void;
 } & Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'onChange'>;
 
-function CheckBox({
+const CheckBox = ({
   className,
   size,
   disabled,
   checked,
   onCheckedChange,
   ...props
-}: CheckBoxProps) {
+}: CheckBoxProps) => {
   return (
     <input
       type="checkbox"
@@ -27,7 +27,7 @@ function CheckBox({
       {...props}
     />
   );
-}
+};
 
 const CheckBoxVariants = cva(
   `aspect-square appearance-none rounded-full before:content-['✓'] before:flex 
