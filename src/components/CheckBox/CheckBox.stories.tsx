@@ -30,13 +30,13 @@ const meta = {
     },
     disabled: {
       options: [true, false],
-      control: { type: 'select' },
+      control: 'boolean',
       defaultValue: { summary: false },
       description: '선택 가능 여부를 지정합니다',
     },
     checked: {
       options: [true, false],
-      control: { type: 'select' },
+      control: 'boolean',
       defaultValue: { summary: false },
       description: '선택 여부를 지정합니다',
     },
