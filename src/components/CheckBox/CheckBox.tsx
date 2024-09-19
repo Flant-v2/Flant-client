@@ -1,14 +1,15 @@
+'use client';
+
 import { type VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@/utils/styles';
 
 type CheckBoxProps = VariantProps<typeof CheckBoxVariants> & {
-  className?: string;
   onCheckedChange: (checked: boolean) => void;
-} & React.ComponentPropsWithoutRef<'input'>;
+} & Omit<React.ComponentPropsWithoutRef<'input'>, 'size' | 'onChange'>;
 
 function CheckBox({
   className,
-  size1,
+  size,
   disabled,
   checked,
   onCheckedChange,
@@ -19,14 +20,12 @@ function CheckBox({
       type="checkbox"
       checked={checked}
       disabled={disabled}
-      className={cn(CheckBoxVariants({ size1, disabled, checked }), className)}
+      className={cn(CheckBoxVariants({ size, disabled, checked }), className)}
       onChange={e => {
         onCheckedChange(e.target.checked);
       }}
       {...props}
-    >
-      CheckBox
-    </input>
+    />
   );
 }
 
@@ -35,7 +34,7 @@ const CheckBoxVariants = cva(
   before:justify-center before:items-center before:text-white before:w-full before:h-full`,
   {
     variants: {
-      size1: {
+      size: {
         medium: 'w-[24px] before:font-[600]',
         large: 'w-[36px] before:font-[700]',
       },
@@ -49,11 +48,10 @@ const CheckBoxVariants = cva(
       },
     },
     defaultVariants: {
-      size1: 'medium',
+      size: 'medium',
       disabled: false,
       checked: false,
     },
-    compoundVariants: [],
   }
 );
 
