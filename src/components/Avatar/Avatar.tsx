@@ -9,7 +9,7 @@ type AvatarProps = {
 
 function Avatar({ imageUrl, userId, createdAt }: AvatarProps) {
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="flex items-center justify-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
       {imageUrl && (
         <Image
           alt="유저 이미지"
