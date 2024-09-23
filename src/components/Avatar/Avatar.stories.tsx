@@ -55,6 +55,11 @@ export const LongUserId: Story = {
     userId: 'this_is_a_very_long_user_id_that_should_be_ellipsis',
     createdAt: '2023-09-18',
   },
+  render: args => (
+    <div className="flex w-[300px]">
+      <Avatar {...args} imageUrl={args.imageUrl} />
+    </div>
+  ),
 };
 
 export default meta;
