@@ -36,7 +36,7 @@ export const Default: Story = {
     imageUrl:
       'https://image.xportsnews.com/contents/images/upload/article/2022/0528/mb_1653693108898879.jpg',
     userId: 'user123',
-    createdAt: '2023-09-22',
+    createdAt: '2024-09-05T01:13:23.090Z',
   },
 };
 
@@ -44,7 +44,7 @@ export const WithoutImage: Story = {
   args: {
     imageUrl: '',
     userId: 'user456',
-    createdAt: '2023-09-20',
+    createdAt: '2024-09-05T01:13:23.090Z',
   },
 };
 
@@ -53,10 +53,10 @@ export const LongUserId: Story = {
     imageUrl:
       'https://image.xportsnews.com/contents/images/upload/article/2022/0528/mb_1653693108898879.jpg',
     userId: 'this_is_a_very_long_user_id_that_should_be_ellipsis',
-    createdAt: '2023-09-18',
+    createdAt: '2024-09-05T01:13:23.090Z',
   },
   render: args => (
-    <div className="flex w-[300px]">
+    <div className="flex w-[200px]">
       <Avatar {...args} imageUrl={args.imageUrl} />
     </div>
   ),

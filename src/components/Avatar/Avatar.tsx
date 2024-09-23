@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { DefaultProfileIcon } from '@/icons';
+import { dayFormatter } from '@/utils/day';
 
 type AvatarProps = {
   imageUrl: string;
@@ -7,6 +8,7 @@ type AvatarProps = {
   createdAt: string;
 };
 
+// "2024-09-05T01:13:23.090Z"
 function Avatar({ imageUrl, userId, createdAt }: AvatarProps) {
   return (
     <div className="flex items-center justify-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
@@ -28,7 +30,7 @@ function Avatar({ imageUrl, userId, createdAt }: AvatarProps) {
           {userId}
         </div>
         <div className="overflow-hidden text-ellipsis whitespace-nowrap text-[11px] font-[400] text-[#B0B0B0]">
-          {createdAt}
+          {dayFormatter(createdAt).format('YYYY.MM.DD HH:mm')}
         </div>
       </div>
     </div>
