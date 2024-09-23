@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.9.0",
+    "@newhighsco/storybook-addon-svgr": "^2.0.27",
     "@storybook/addon-essentials": "^8.3.0",
     "@storybook/addon-interactions": "^8.3.0",
     "@storybook/addon-links": "^8.3.0",
@@ -38,6 +39,7 @@
     "@storybook/blocks": "^8.3.0",
     "@storybook/nextjs": "^8.3.0",
     "@storybook/react": "^8.3.0",
+    "@storybook/react-webpack5": "^8.3.2",
     "@storybook/test": "^8.3.0",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
@@ -55,7 +57,7 @@
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
-    "storybook": "^8.3.0",
+    "storybook": "^8.3.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },

@@ -15,15 +15,15 @@ const meta = {
   },
   argTypes: {
     imageUrl: {
-      control: 'text',
+      control: { type: 'text' },
       description: '아바타에 표시할 이미지 URL',
     },
     userId: {
-      control: 'text',
+      control: { type: 'text' },
       description: '유저 ID',
     },
     createdAt: {
-      control: 'text',
+      control: { type: 'text' },
       description: '유저 생성 날짜',
     },
   },
