@@ -23,7 +23,7 @@ const Avatar = ({ imageUrl, userName: userId, createdAt, Icon }: AvatarProps) =>
         />
       )}
       {!imageUrl && (
-        <DefaultProfileIcon className="flex !h-[36px] !w-[36px] flex-shrink-0 overflow-hidden rounded-full object-cover" />
+        <DefaultProfileIcon className="flex h-[36px] w-[36px] flex-shrink-0 overflow-hidden rounded-full object-cover" />
       )}
       <div className="flex flex-col justify-between overflow-hidden text-ellipsis whitespace-nowrap">
         <div className="flex items-center gap-0.5 overflow-hidden text-ellipsis whitespace-nowrap">
