@@ -8,6 +8,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { XIcon } from '@/icons';
 import { cn } from '@/utils/styles';
 
 type SheetContextProps = {
@@ -41,27 +42,84 @@ export const useSheetContext = () => {
   return context;
 };
 
-export const SheetContent = () => {
+type SheetContentProps = {
+  onSubmit?: () => void;
+};
+export const SheetContent = ({ children, onSubmit }: PropsWithChildren<SheetContentProps>) => {
   // 뒷배경이 있어야한다.
   // 스르륵이 되어야한다.
   const { isOpen, toggleSheet } = useSheetContext();
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 top-0 z-50 ${isOpen ? '' : 'hidden'}`}
+      className={`fixed bottom-0 left-0 right-0 top-0 z-50 bg-black/80 ${isOpen ? '' : 'hidden'}`}
       onClick={toggleSheet}
-    />
+    >
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          onSubmit && onSubmit();
+        }}
+      >
+        {children}
+      </form>
+    </div>
   );
 };
-export const SheetHeader = () => {
-  return <div>SheetHeader</div>;
+export const SheetHeader = ({ children }: PropsWithChildren) => {
+  const { toggleSheet } = useSheetContext();
+  return (
+    <div className="flex items-end justify-center p-6">
+      <div className="relative flex items-end justify-center">
+        {children}
+        <XIcon className="absolute h-6 w-6" onClick={toggleSheet} />
+      </div>
+    </div>
+  );
 };
-export const SheetFooter = () => {
-  return <div>SheetFooter</div>;
+type SheetFooterProps = {
+  children: string;
+  className: string;
+};
+export const SheetFooter = ({ children, className }: PropsWithChildren<SheetFooterProps>) => {
+  const { toggleSheet } = useSheetContext();
+  return (
+    <>
+      <div className="" />
+      <div className={cn(className, '')}>
+        <button type="submit" onClick={toggleSheet}>
+          {children}
+        </button>
+      </div>
+    </>
+  );
 };
 
-export const SheetTrigger = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
+export const SheetTrigger = ({
+  className,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement | HTMLButtonElement>) => {
   // 트리거 함수
-  return <div className={cn(className, '')} {...props} />;
+  const { toggleSheet } = useSheetContext();
+  if (!children) {
+    return null;
+  }
+  // children이 JSX.Element인지 확인
+  if (React.isValidElement(children)) {
+    return (
+      <div className={cn(className, '')} {...props}>
+        {React.cloneElement(children, {
+          onClick: toggleSheet,
+          ...props,
+        })}
+      </div>
+    );
+  }
+  return (
+    <button className={cn(className, '')} onClick={toggleSheet} {...props}>
+      {children}
+    </button>
+  );
 };
 
 /**
