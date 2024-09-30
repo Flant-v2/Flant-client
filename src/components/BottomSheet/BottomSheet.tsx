@@ -1,49 +1,47 @@
 'use client';
 
 import React, { PropsWithChildren, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Provider, useAtom } from 'jotai';
+import { Provider } from 'jotai';
+import { useSheetStore } from '@/hooks/useSheetStore';
 import { XIcon } from '@/icons';
-import { isOpenAtom, sheetStore } from '@/store/sheetStore';
+import { sheetStore } from '@/store/sheetStore';
 import { cn } from '@/utils/styles';
 
 const Sheet = ({ children }: PropsWithChildren) => {
   // 상태들 => 열리고 닫히고 상태 조타이로 관리!
-  const [isOpen] = useAtom(isOpenAtom, { store: sheetStore });
+  const [isOpen] = useSheetStore();
   // 스크롤 위치 넘버값을 받는 ref
-  const scrollPositionRef = useRef<null | number>(null);
+  const scrollPositionRef = useRef<number | null>(null);
 
   // 현재 열리고 닫히는 상태 인지하여 바디부분 스크롤을 방지해주는 Effect
   useEffect(() => {
     if (isOpen) {
       // 열렸을때 바디 잠금.
       scrollPositionRef.current = preventScroll();
-    } else {
-      // 풀리면 바디 풀고 해당 스크롤 값으로 이동.
-      scrollPositionRef.current && allowScroll(scrollPositionRef.current);
+      return;
     }
+    // 풀리면 바디 풀고 해당 스크롤 값으로 이동.
+    scrollPositionRef.current && allowScroll(scrollPositionRef.current);
   }, [isOpen]);
   return <Provider store={sheetStore}>{children}</Provider>;
 };
-export const MemoizedSheet = React.memo(Sheet);
 
 // 바텀시트 컨텐츠 : 자식과 버튼으로 제출시 처리될 onSubmit 함수를 받는다.
 type SheetContentProps = {
   onSubmit?: () => void;
 };
 export const SheetContent = ({ children, onSubmit }: PropsWithChildren<SheetContentProps>) => {
-  const [isOpen, setIsOepn] = useAtom(isOpenAtom, { store: sheetStore });
+  const [isOpen, setIsOepn] = useSheetStore();
   const [sheetMount, setSheetMount] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
 
-  // 스스륵 효과가 발생하기 위해서 언마운트되는 시간을 늦추기 위해 sheetMount 상태를 추가로 관리함.
-  useEffect(() => {
+  useLayoutEffect(() => {
     setTimeout(() => {
+      // 스스륵 효과가 발생하기 위해서 언마운트되는 시간을 늦추기 위해 sheetMount 상태를 추가로 관리함.
       // 300초 후에 언마운트됨! isOpen의 값이 false로 변하는 즉시 translate-y-full이 실행된다!
       setSheetMount(isOpen);
     }, 300);
-  }, [isOpen]);
 
-  useLayoutEffect(() => {
     if (isOpen) {
       // useLayoutEffect를 사용해서 form이 랜더링될 때 아래서 랜더링될 수 있도록 조작
       formRef.current?.classList.add('translate-y-full');
@@ -51,7 +49,7 @@ export const SheetContent = ({ children, onSubmit }: PropsWithChildren<SheetCont
         // 즉시 translate-y-0를 통해서 원래 자리로 이동하면서 스르륵 효과를 넣을 수 있도록 처리함.
         formRef.current?.classList.remove('translate-y-full');
         formRef.current?.classList.add('translate-y-0');
-      }, 2);
+      }, 0);
     }
   }, [isOpen]);
 
@@ -83,8 +81,8 @@ export const SheetContent = ({ children, onSubmit }: PropsWithChildren<SheetCont
 type SheetHeaderProps = {
   children: string;
 };
-export const SheetHeader = ({ children }: PropsWithChildren<SheetHeaderProps>) => {
-  const [, setIsOepn] = useAtom(isOpenAtom, { store: sheetStore });
+export const SheetHeader = ({ children }: SheetHeaderProps) => {
+  const [, setIsOepn] = useSheetStore();
 
   return (
     <div className="sticky top-0 flex items-end justify-center bg-white py-4">
@@ -108,24 +106,21 @@ type SheetFooterProps = {
   children: string;
   className?: string;
 };
-export const SheetFooter = ({ children, className }: PropsWithChildren<SheetFooterProps>) => {
-  const [, setIsOepn] = useAtom(isOpenAtom, { store: sheetStore });
+export const SheetFooter = ({ children, className }: SheetFooterProps) => {
+  const [, setIsOepn] = useSheetStore();
 
   return (
-    <>
-      <div className="" />
-      <div className={cn(className, 'sticky bottom-0 bg-white py-4')}>
-        <button
-          className="w-full overflow-hidden text-ellipsis whitespace-nowrap rounded-[8px] bg-[#E85C0D] px-[14px] py-[13px] text-[17px] font-[700] text-white hover:brightness-95 active:brightness-75"
-          type="submit"
-          onClick={() => {
-            setIsOepn(false);
-          }}
-        >
-          {children}
-        </button>
-      </div>
-    </>
+    <div className={cn(className, 'sticky bottom-0 bg-white py-4')}>
+      <button
+        className="w-full overflow-hidden text-ellipsis whitespace-nowrap rounded-[8px] bg-[#E85C0D] px-[14px] py-[13px] text-[17px] font-[700] text-white hover:brightness-95 active:brightness-75"
+        type="submit"
+        onClick={() => {
+          setIsOepn(false);
+        }}
+      >
+        {children}
+      </button>
+    </div>
   );
 };
 
@@ -136,7 +131,7 @@ export const SheetTrigger = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement | HTMLButtonElement>) => {
   // 트리거 함수, 조타이로 세터 함수만 받는다.
-  const [, setIsOepn] = useAtom(isOpenAtom, { store: sheetStore });
+  const [, setIsOepn] = useSheetStore();
   // children이 없는 경우
   if (!children) {
     return null;
@@ -169,9 +164,11 @@ export const SheetTrigger = ({
   );
 };
 
+export const MemoizedSheet = React.memo(Sheet);
+
 // 스크롤을 방지하고 현재 위치를 반환한다.
 // 현재 스크롤 위치 리턴함: number 타입
-export const preventScroll = () => {
+const preventScroll = () => {
   const currentScrollY = window.scrollY;
   document.body.style.position = 'fixed';
   document.body.style.width = '100%';
@@ -182,7 +179,7 @@ export const preventScroll = () => {
 
 // 스크롤을 허용하고, 스크롤 방지 함수에서 반환된 위치로 이동한다.
 // params : prevScrollY 스크롤 방지 함수에서 반환된 스크롤 위치 :number
-export const allowScroll = (prevScrollY: number) => {
+const allowScroll = (prevScrollY: number) => {
   document.body.style.position = '';
   document.body.style.width = '';
   document.body.style.top = '';
