@@ -9,12 +9,16 @@ import { cn } from '@/utils/styles';
 const Sheet = ({ children }: PropsWithChildren) => {
   // 상태들 => 열리고 닫히고 상태 조타이로 관리!
   const [isOpen] = useAtom(isOpenAtom, { store: sheetStore });
+  // 스크롤 위치 넘버값을 받는 ref
   const scrollPositionRef = useRef<null | number>(null);
+
   // 현재 열리고 닫히는 상태 인지하여 바디부분 스크롤을 방지해주는 Effect
   useEffect(() => {
     if (isOpen) {
+      // 열렸을때 바디 잠금.
       scrollPositionRef.current = preventScroll();
     } else {
+      // 풀리면 바디 풀고 해당 스크롤 값으로 이동.
       scrollPositionRef.current && allowScroll(scrollPositionRef.current);
     }
   }, [isOpen]);
@@ -31,20 +35,26 @@ export const SheetContent = ({ children, onSubmit }: PropsWithChildren<SheetCont
   const [sheetMount, setSheetMount] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
+  // 스스륵 효과가 발생하기 위해서 언마운트되는 시간을 늦추기 위해 sheetMount 상태를 추가로 관리함.
   useEffect(() => {
     setTimeout(() => {
+      // 300초 후에 언마운트됨! isOpen의 값이 false로 변하는 즉시 translate-y-full이 실행된다!
       setSheetMount(isOpen);
     }, 300);
   }, [isOpen]);
+
   useLayoutEffect(() => {
     if (isOpen) {
+      // useLayoutEffect를 사용해서 form이 랜더링될 때 아래서 랜더링될 수 있도록 조작
       formRef.current?.classList.add('translate-y-full');
       setTimeout(() => {
+        // 즉시 translate-y-0를 통해서 원래 자리로 이동하면서 스르륵 효과를 넣을 수 있도록 처리함.
         formRef.current?.classList.remove('translate-y-full');
         formRef.current?.classList.add('translate-y-0');
       }, 2);
     }
   }, [isOpen]);
+
   return (
     <div className={isOpen ? '' : sheetMount ? '' : 'hidden'}>
       {/* 뒷배경임 */}
@@ -75,6 +85,7 @@ type SheetHeaderProps = {
 };
 export const SheetHeader = ({ children }: PropsWithChildren<SheetHeaderProps>) => {
   const [, setIsOepn] = useAtom(isOpenAtom, { store: sheetStore });
+
   return (
     <div className="sticky top-0 flex items-end justify-center bg-white py-4">
       <div className="relative flex w-full items-end justify-center">
@@ -99,6 +110,7 @@ type SheetFooterProps = {
 };
 export const SheetFooter = ({ children, className }: PropsWithChildren<SheetFooterProps>) => {
   const [, setIsOepn] = useAtom(isOpenAtom, { store: sheetStore });
+
   return (
     <>
       <div className="" />
@@ -142,6 +154,7 @@ export const SheetTrigger = ({
       </div>
     );
   }
+
   return (
     // children이 JSX.Element이 아니라면 대부분 그냥 원시 표기값들.
     <button
