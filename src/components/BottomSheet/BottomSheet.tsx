@@ -1,8 +1,10 @@
 'use client';
 
-import React, { PropsWithChildren, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { PropsWithChildren, useRef } from 'react';
 import { Provider } from 'jotai';
+import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 import { useSheetStore } from '@/hooks/useSheetStore';
+import { useSheetTransition } from '@/hooks/useSheetTransition';
 import { XIcon } from '@/icons';
 import { sheetStore } from '@/store/sheetStore';
 import { cn } from '@/utils/styles';
@@ -10,19 +12,8 @@ import { cn } from '@/utils/styles';
 const Sheet = ({ children }: PropsWithChildren) => {
   // 상태들 => 열리고 닫히고 상태 조타이로 관리!
   const [isOpen] = useSheetStore();
-  // 스크롤 위치 넘버값을 받는 ref
-  const scrollPositionRef = useRef<number | null>(null);
-
-  // 현재 열리고 닫히는 상태 인지하여 바디부분 스크롤을 방지해주는 Effect
-  useEffect(() => {
-    if (isOpen) {
-      // 열렸을때 바디 잠금.
-      scrollPositionRef.current = preventScroll();
-      return;
-    }
-    // 풀리면 바디 풀고 해당 스크롤 값으로 이동.
-    scrollPositionRef.current && allowScroll(scrollPositionRef.current);
-  }, [isOpen]);
+  // 별도 훅으로 분리해서 관리
+  useBodyScrollLock(isOpen);
   return <Provider store={sheetStore}>{children}</Provider>;
 };
 
@@ -32,26 +23,8 @@ type SheetContentProps = {
 };
 export const SheetContent = ({ children, onSubmit }: PropsWithChildren<SheetContentProps>) => {
   const [isOpen, setIsOepn] = useSheetStore();
-  const [sheetMount, setSheetMount] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
-
-  useLayoutEffect(() => {
-    setTimeout(() => {
-      // 스스륵 효과가 발생하기 위해서 언마운트되는 시간을 늦추기 위해 sheetMount 상태를 추가로 관리함.
-      // 300초 후에 언마운트됨! isOpen의 값이 false로 변하는 즉시 translate-y-full이 실행된다!
-      setSheetMount(isOpen);
-    }, 300);
-
-    if (isOpen) {
-      // useLayoutEffect를 사용해서 form이 랜더링될 때 아래서 랜더링될 수 있도록 조작
-      formRef.current?.classList.add('translate-y-full');
-      setTimeout(() => {
-        // 즉시 translate-y-0를 통해서 원래 자리로 이동하면서 스르륵 효과를 넣을 수 있도록 처리함.
-        formRef.current?.classList.remove('translate-y-full');
-        formRef.current?.classList.add('translate-y-0');
-      }, 0);
-    }
-  }, [isOpen]);
+  const sheetMount = useSheetTransition({ isOpen, formRef });
 
   return (
     <div className={isOpen ? '' : sheetMount ? '' : 'hidden'}>
@@ -165,24 +138,3 @@ export const SheetTrigger = ({
 };
 
 export const MemoizedSheet = React.memo(Sheet);
-
-// 스크롤을 방지하고 현재 위치를 반환한다.
-// 현재 스크롤 위치 리턴함: number 타입
-const preventScroll = () => {
-  const currentScrollY = window.scrollY;
-  document.body.style.position = 'fixed';
-  document.body.style.width = '100%';
-  document.body.style.top = `-${currentScrollY}px`; // 현재 스크롤 위치
-  document.body.style.overflowY = 'scroll';
-  return currentScrollY;
-};
-
-// 스크롤을 허용하고, 스크롤 방지 함수에서 반환된 위치로 이동한다.
-// params : prevScrollY 스크롤 방지 함수에서 반환된 스크롤 위치 :number
-const allowScroll = (prevScrollY: number) => {
-  document.body.style.position = '';
-  document.body.style.width = '';
-  document.body.style.top = '';
-  document.body.style.overflowY = '';
-  window.scrollTo(0, prevScrollY);
-};
