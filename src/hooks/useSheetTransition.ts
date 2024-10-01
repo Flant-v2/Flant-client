@@ -2,9 +2,9 @@ import { useLayoutEffect, useState } from 'react';
 
 type useSheetTransitionProps = {
   isOpen: boolean;
-  formRef: React.MutableRefObject<HTMLElement | null>;
+  ref: React.MutableRefObject<HTMLElement | null>;
 };
-export const useSheetTransition = ({ isOpen, formRef }: useSheetTransitionProps) => {
+export const useSheetTransition = ({ isOpen, ref: formRef }: useSheetTransitionProps) => {
   const [sheetMount, setSheetMount] = useState(false);
 
   useLayoutEffect(() => {

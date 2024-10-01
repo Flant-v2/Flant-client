@@ -24,7 +24,7 @@ type SheetContentProps = {
 export const SheetContent = ({ children, onSubmit }: PropsWithChildren<SheetContentProps>) => {
   const [isOpen, setIsOepn] = useSheetStore();
   const formRef = useRef<HTMLFormElement | null>(null);
-  const sheetMount = useSheetTransition({ isOpen, formRef });
+  const sheetMount = useSheetTransition({ isOpen, ref: formRef });
 
   return (
     <div className={isOpen ? '' : sheetMount ? '' : 'hidden'}>
